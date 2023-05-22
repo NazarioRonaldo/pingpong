@@ -55,6 +55,11 @@ while game:
         r2.update_r()
         ball.rect.x += speed_x
         ball.rect.y += speed_y
+        if sprite.collide_rect(r1, ball) or sprite.collide_rect(r2, ball):
+            speed_x *= -1
+            speed_y *= 1
+        if ball.rect.y > win_h-50 or ball.rect.y < 0:
+            speed_y *= -1
 
         r1.reset()
         r2.reset()
