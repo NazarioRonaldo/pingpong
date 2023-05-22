@@ -38,9 +38,26 @@ finish = False
 clock = time.Clock()
 FPS = 60
 
+r1 = Player('files\g.png', 30, 200, 4, 50, 150)
+r2 = Player('files\g.png', 520, 200, 4, 50, 150)
+ball = Player('files\e.png', 200, 200, 4, 50, 50)
+
+speed_x = 5
+speed_y = 5
+
 while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
+    if finish != True:
+        window.fill(back)
+        r1.update_l()
+        r2.update_r()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
+
+        r1.reset()
+        r2.reset()
+        ball.reset()
     display.update()
     clock.tick(FPS)
