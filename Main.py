@@ -42,8 +42,14 @@ r1 = Player('files\g.png', 30, 200, 4, 50, 150)
 r2 = Player('files\g.png', 520, 200, 4, 50, 150)
 ball = Player('files\e.png', 200, 200, 4, 50, 50)
 
-speed_x = 5
-speed_y = 5
+font.init()
+font = font.Font(None, 35)
+lose1 = font.render('Player 1 Lose', True, (180, 0, 0))
+lose2 = font.render('Player 2 Lose', True, (180, 0, 0))
+
+
+speed_x = 7
+speed_y = 7
 
 while game:
     for e in event.get():
@@ -57,9 +63,20 @@ while game:
         ball.rect.y += speed_y
         if sprite.collide_rect(r1, ball) or sprite.collide_rect(r2, ball):
             speed_x *= -1
-            speed_y *= 1
+            
         if ball.rect.y > win_h-50 or ball.rect.y < 0:
             speed_y *= -1
+
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
+            game_over = True
+
+        if ball.rect.x > win_w:
+            finish = True
+            window.blit(lose2, (200, 200))
+            game_over = True
+
 
         r1.reset()
         r2.reset()
